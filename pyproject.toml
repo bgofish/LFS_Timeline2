@@ -6,3 +6,4 @@ dependencies = []
 
 [tool.lichtfeld]
 type = "plugin"
+hot_reload = true  # Add this line to resolve the error
