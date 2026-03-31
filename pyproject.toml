@@ -5,5 +5,12 @@ description = "Spreadsheet style camera path editor"
 dependencies = []
 
 [tool.lichtfeld]
+# Manifest Version 1 Requirements
+plugin_api = "1.0"
+lichtfeld_version = ">=1.0.0"
+required_features = []
+
+# Plugin Settings
 type = "plugin"
-hot_reload = true  # Add this line to resolve the error
+hot_reload = true
+
