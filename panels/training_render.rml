@@ -1,0 +1,40 @@
+<rml>
+<head>
+    <link type="text/rcss" href="style.rcss"/>
+    <style>
+        table { width: 100%; border-width: 1px; border-color: #444; }
+        th { background-color: #222; padding: 5px; font-weight: bold; }
+        td { padding: 2px; }
+        input.cell-input { width: 60px; background-color: #333; color: white; border: none; }
+        .btn-row { margin-top: 10px; }
+    </style>
+</head>
+<body class="window" data-model="camera_editor">
+    <div id="spreadsheet-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>Idx</th>
+                    <th>X</th>
+                    <th>Y</th>
+                    <th>Z</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr data-for="kf, index : keyframes">
+                    <td>{{index}}</td>
+                    <td><input type="number" class="cell-input" data-value="kf.x"/></td>
+                    <td><input type="number" class="cell-input" data-value="kf.y"/></td>
+                    <td><input type="number" class="cell-input" data-value="kf.z"/></td>
+                    <td><button onclick="goto_keyframe(index)">Go</button></td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="btn-row">
+            <button onclick="refresh_path">Load/Refresh Path</button>
+            <button onclick="save_path">Apply Changes</button>
+        </div>
+    </div>
+</body>
+</rml>

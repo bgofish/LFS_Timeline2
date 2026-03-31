@@ -1,0 +1,8 @@
+[project]
+name = "lfs_spreadsheet_editor"
+version = "0.1.0"
+description = "Spreadsheet style camera path editor"
+dependencies = []
+
+[tool.lichtfeld]
+type = "plugin"
