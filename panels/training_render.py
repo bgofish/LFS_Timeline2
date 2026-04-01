@@ -1,16 +1,8 @@
-try:
-    import studio
-except:
-    import lfs_studio as studio
-
-def setup_data_binding():
+# No top-level 'lfs' import needed here
+def setup_data_binding(context):
     pass
 
-class KeyframeSpreadsheetPanel(studio.Panel):
-    bl_idname = "TIMELINE_PT_spreadsheet"
-    bl_label = "Keyframe Spreadsheet"
-    
-    def draw(self, context):
-        layout = self.layout
-        # Spreadsheet-style layout logic here
-        layout.label(text="Keyframe Editor")
+class KeyframeSpreadsheetPanel:
+    id = "TIMELINE_PT_spreadsheet"
+    label = "Keyframe Spreadsheet"
+    panel_path = "training_render.rml" # Ensure this file exists in the folder
