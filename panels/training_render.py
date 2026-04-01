@@ -1,12 +1,14 @@
-# No imports needed here
 def setup_spreadsheet_data(context):
-    """Provides the data for the RML spreadsheet."""
     pass
 
 class KeyframeSpreadsheetPanel:
     id = "TIMELINE_PT_spreadsheet"
     label = "Keyframe Spreadsheet"
-    category = "LichtFeld" 
+    # Try SCENE in all caps, as many LFS versions use this internally
+    category = "SCENE" 
+    # Fallback for alternative UI engines
+    bl_category = "SCENE"
+    # Ensure this points to the right file
     panel_path = "training_render.rml" 
 
     def draw(self, context):
