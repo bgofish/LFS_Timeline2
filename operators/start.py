@@ -1,12 +1,12 @@
-import lichtfeld
+try:
+    import studio
+except:
+    import lfs_studio as studio
 
-class RemoveKeyframeOperator(lichtfeld.types.Operator):
-    id = "timeline.remove_keyframe"
-    label = "Remove Keyframe"
-    
-    def execute(self, index=None):
-        if index is not None:
-            # Access the scene timeline through the lichtfeld context
-            lichtfeld.context.scene.timeline.remove(index)
-            lichtfeld.log.info(f"Removed keyframe {index}")
-        return True
+class StartEditorOperator(studio.Operator):
+    bl_idname = "lichtfeld.start_editor"
+    bl_label = "Start Spreadsheet Editor"
+
+    def execute(self, context):
+        print("Editor Started")
+        return {'FINISHED'}
