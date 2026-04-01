@@ -1,5 +1,4 @@
-import lfs # This is the actual module provided by LichtFeld Studio
-
+import lichtfeld as lfs
 class CameraEditorModel:
     def __init__(self):
         self.keyframes = []
