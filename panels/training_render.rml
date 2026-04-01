@@ -1,40 +1,31 @@
 <rml>
 <head>
     <link type="text/rcss" href="style.rcss"/>
-    <style>
-        table { width: 100%; border-width: 1px; border-color: #444; }
-        th { background-color: #222; padding: 5px; font-weight: bold; }
-        td { padding: 2px; }
-        input.cell-input { width: 60px; background-color: #333; color: white; border: none; }
-        .btn-row { margin-top: 10px; }
-    </style>
+    <title>Keyframe Spreadsheet</title>
 </head>
-<body class="window" data-model="camera_editor">
+<body class="window">
     <div id="spreadsheet-container">
         <table>
             <thead>
                 <tr>
-                    <th>Idx</th>
-                    <th>X</th>
-                    <th>Y</th>
-                    <th>Z</th>
+                    <th>Frame</th>
+                    <th>Pos X</th>
+                    <th>Pos Y</th>
+                    <th>Pos Z</th>
                     <th>Actions</th>
                 </tr>
             </thead>
-            <tbody>
-                <tr data-for="kf, index : keyframes">
-                    <td>{{index}}</td>
-                    <td><input type="number" class="cell-input" data-value="kf.x"/></td>
-                    <td><input type="number" class="cell-input" data-value="kf.y"/></td>
-                    <td><input type="number" class="cell-input" data-value="kf.z"/></td>
-                    <td><button onclick="goto_keyframe(index)">Go</button></td>
+            <tbody data-for="kf : keyframes">
+                <tr>
+                    <td><input type="number" data-value="kf.frame" /></td>
+                    <td><input type="number" data-value="kf.x" /></td>
+                    <td><input type="number" data-value="kf.y" /></td>
+                    <td><input type="number" data-value="kf.z" /></td>
+                    <td><button data-onclick="remove_kf(kf.id)">Delete</button></td>
                 </tr>
             </tbody>
         </table>
-        <div class="btn-row">
-            <button onclick="refresh_path">Load/Refresh Path</button>
-            <button onclick="save_path">Apply Changes</button>
-        </div>
+        <button data-onclick="add_kf">Add Keyframe</button>
     </div>
 </body>
 </rml>

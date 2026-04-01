@@ -1,10 +1,10 @@
-# SPDX-FileCopyrightText: 2025
 # SPDX-License-Identifier: GPL-3.0-or-later
-
-"""Training Render Plugin for LichtFeld Studio."""
-from .panels.training_render import setup_data_binding
-from .operators.start import StartEditorOperator
+import lfs
+from .panels.training_render import KeyframeSpreadsheetPanel
+from .operators.start import RemoveKeyframeOperator, AddKeyframeOperator
 
 def register():
-    # Registration logic for LichtFeld Studio
-    pass
+    lfs.registry.register_class(KeyframeSpreadsheetPanel)
+    lfs.registry.register_class(RemoveKeyframeOperator)
+    lfs.registry.register_class(AddKeyframeOperator)
+    lfs.log.info("Timeline Spreadsheet Plugin Loaded")

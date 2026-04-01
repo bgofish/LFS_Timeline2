@@ -1,47 +1,35 @@
-import lichtfeld as lfs
-class CameraEditorModel:
-    def __init__(self):
-        self.keyframes = []
+import lfs
 
-    def load_from_studio(self):
-        # Get the active path from the scene state
-        active_path = lfs.state.camera_path
-        if active_path:
-            self.keyframes = [
-                {"x": round(p.position.x, 3), 
-                 "y": round(p.position.y, 3), 
-                 "z": round(p.position.z, 3)} 
-                for p in active_path.keyframes
-            ]
-
-    def apply_to_studio(self):
-        active_path = lfs.state.camera_path
-        if active_path:
-            for i, kf in enumerate(self.keyframes):
-                if i < len(active_path.keyframes):
-                    active_path.keyframes[i].position.x = float(kf['x'])
-                    active_path.keyframes[i].position.y = float(kf['y'])
-                    active_path.keyframes[i].position.z = float(kf['z'])
-            # Trigger a redraw of the viewport
-            lfs.core.renderer.request_redraw()
-
-def setup_data_binding(context):
-    model = CameraEditorModel()
-    # Create the binding between Python and RML
-    view_model = context.create_datamodel("camera_editor")
-    view_model.bind("keyframes", model.keyframes)
+class KeyframeSpreadsheetPanel(lfs.types.Panel):
+    id = "TIMELINE_PT_spreadsheet"
+    label = "Keyframe Spreadsheet"
     
-    @view_model.on_event("refresh_path")
-    def on_refresh(event):
-        model.load_from_studio()
-        view_model.dirty_variable("keyframes") # Force UI to update
+    def draw(self):
+        layout = self.layout
+        # Access the current timeline/camera path
+        timeline = lfs.context.scene.timeline 
         
-    @view_model.on_event("save_path")
-    def on_save(event):
-        model.apply_to_studio()
+        # Header Row
+        row = layout.row(heading=True)
+        row.label("Frame", width=50)
+        row.label("Position X", width=80)
+        row.label("Position Y", width=80)
+        row.label("Position Z", width=80)
+        row.label("Actions", width=60)
+        
+        layout.separator()
 
-    @view_model.on_event("goto_keyframe")
-    def on_goto(event):
-        idx = int(event.parameters['index'])
-        pos = model.keyframes[idx]
-        lfs.state.camera.position = lfs.math.Vector3(pos['x'], pos['y'], pos['z'])
+        # Data Rows (The "Spreadsheet")
+        for i, kf in enumerate(timeline.keyframes):
+            row = layout.row()
+            # editable properties
+            row.prop(kf, "frame", text="") 
+            row.prop(kf.position, "x", text="")
+            row.prop(kf.position, "y", text="")
+            row.prop(kf.position, "z", text="")
+            
+            # Delete button for each row
+            row.button("X", operator="timeline.remove_keyframe", args={'index': i})
+
+        layout.separator()
+        layout.button("Add New Keyframe", operator="timeline.add_current_keyframe")
