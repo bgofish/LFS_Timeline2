@@ -4,16 +4,16 @@ from .operators.start import StartEditorOperator
 
 def register(context):
     """
-    LichtFeld Studio calls register() and passes the context.
-    We use that context to access the registry.
+    Called by LichtFeld Studio on plugin install/load.
+    We use the provided context to access the registry.
     """
     setup_data_binding(context)
     
-    # Registering classes via the context registry
+    # Register the classes to the Studio registry
     context.registry.register_class(KeyframeSpreadsheetPanel)
     context.registry.register_class(StartEditorOperator)
     
-    print("Spreadsheet Editor Plugin Registered")
+    print("Spreadsheet Editor Plugin Loaded Successfully")
 
 def unregister(context):
     context.registry.unregister_class(KeyframeSpreadsheetPanel)
