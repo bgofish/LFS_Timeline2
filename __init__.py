@@ -1,10 +1,10 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
-import lfs
+import lichtfeld
 from .panels.training_render import KeyframeSpreadsheetPanel
-from .operators.start import RemoveKeyframeOperator, AddKeyframeOperator
+from .operators.start import RemoveKeyframeOperator
 
 def register():
-    lfs.registry.register_class(KeyframeSpreadsheetPanel)
-    lfs.registry.register_class(RemoveKeyframeOperator)
-    lfs.registry.register_class(AddKeyframeOperator)
-    lfs.log.info("Timeline Spreadsheet Plugin Loaded")
+    # Registration for LichtFeld Studio v0.5+
+    lichtfeld.registry.register_class(KeyframeSpreadsheetPanel)
+    lichtfeld.registry.register_class(RemoveKeyframeOperator)
+    lichtfeld.log.info("Timeline Spreadsheet Plugin Loaded Successfully")
