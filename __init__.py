@@ -1,17 +1,18 @@
+# SPDX-FileCopyrightText: 2025
 # SPDX-License-Identifier: GPL-3.0-or-later
-"""Training Render Plugin for LichtFeld Studio."""
 
-# Try importing from the internal 'studio' module
-try:
-    import studio
-except ImportError:
-    # Fallback for different versions
-    import lfs_studio as studio
+PLUGIN_NAME = "Training Render Spreadsheet"
+PLUGIN_VERSION = "1.0"
 
-from .panels.training_render import setup_data_binding
+from .panels.training_render import setup_data_binding, KeyframeSpreadsheetPanel
 from .operators.start import StartEditorOperator
 
-def register():
-    setup_data_binding()
-    studio.register_class(StartEditorOperator)
-    # The panel registration happens here once defined in panels
+def initialize(context):
+    """Entry point for LichtFeld Studio plugins."""
+    setup_data_binding(context)
+    
+    # Register the spreadsheet UI and the logic operator
+    context.registry.register_class(KeyframeSpreadsheetPanel)
+    context.registry.register_class(StartEditorOperator)
+    
+    print(f"{PLUGIN_NAME} initialized successfully.")
