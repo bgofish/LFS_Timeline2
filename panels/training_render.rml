@@ -1,31 +1,9 @@
 <rml>
 <head>
     <title>Keyframe Spreadsheet</title>
-    <style>
-        body {
-            font-family: Lato;
-            font-size: 13px;
-            color: white;
-        }
-        .table-header { font-weight: bold; background: #333; }
-        .row { display: flex; border-bottom: 1px solid #444; padding: 5px; }
-        .col { flex: 1; }
-    </style>
 </head>
 <body class="window">
-    <div class="table-header row">
-        <div class="col">Frame</div>
-        <div class="col">PosX</div>
-        <div class="col">PosY</div>
-        <div class="col">PosZ</div>
-    </div>
-    <!-- This is a placeholder for your data binding loop -->
-    <div class="row">
-        <div class="col">1</div>
-        <div class="col">0.00</div>
-        <div class="col">1.25</div>
-        <div class="col">-0.50</div>
-    </div>
-    <button onclick="lichtfeld.start_editor">Refresh Spreadsheet</button>
+    <h1>Keyframe Editor</h1>
+    <p>Spreadsheet will appear here.</p>
 </body>
 </rml>
