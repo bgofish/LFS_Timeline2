@@ -1,15 +1,20 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
-
-PLUGIN_NAME = "Spreadsheet Editor"
-PLUGIN_VERSION = "1.0"
-
-from .panels.training_render import KeyframeSpreadsheetPanel
+from .panels.training_render import setup_data_binding, KeyframeSpreadsheetPanel
 from .operators.start import StartEditorOperator
 
-def initialize(context):
-    """LichtFeld Studio calls this and provides the 'context' object."""
-    # Register your classes using the provided context
-    context.registry.register_panel(KeyframeSpreadsheetPanel)
-    context.registry.register_operator(StartEditorOperator)
+def register(context):
+    """
+    LichtFeld Studio calls register() and passes the context.
+    We use that context to access the registry.
+    """
+    setup_data_binding(context)
     
-    print(f"{PLUGIN_NAME} version {PLUGIN_VERSION} initialized.")
+    # Registering classes via the context registry
+    context.registry.register_class(KeyframeSpreadsheetPanel)
+    context.registry.register_class(StartEditorOperator)
+    
+    print("Spreadsheet Editor Plugin Registered")
+
+def unregister(context):
+    context.registry.unregister_class(KeyframeSpreadsheetPanel)
+    context.registry.unregister_class(StartEditorOperator)
